@@ -1,0 +1,79 @@
+# Linux Command Line
+
+``` console
+A Few of the basic linux commands that you should know and practice.
+
+PWD   CD    LS   MKDIR   NANO
+CAT   MV    CP   PS      PS AUX
+TOP   HTOP  W    WHO     NETSTAT
+WHATIS
+```
+
+* `/pwd` Print name of current/working directory
+alex@alex:~/Desktop$ pwd
+/home/alex/Dekstop
+
+* `/cd` In order to change directories
+alex@alex:~ pwd
+/home/alex
+alex@alex:~$ cd Desktop/
+alex@alex:~/Desktop$ pwd
+/home/alex/Desktop
+
+* `/ls` List directory contents
+alex@alex:/$ ls
+bin   dev   lib    libx32      mnt  root  snap  sys  var  
+boot  etc   lib32  lost+found  opt  run   srv   tmp
+cdrom home  lib64  media       proc sbin  swapfile   usr
+
+* `/ls -alh` Which in something that can be used when you are wanting to find the Permissions, Owner, File Size, Date Created, and File Name.
+  * `/ls -a` All
+  * `/ls -l` Use a long listing format
+  * `/ls -h` Human Readable
+
+* `/ls -alh` To combine all of them the proper way.
+
+* `/mkdir` Create a directory
+
+alex@alex:~/Desktop$ mkdir github_test 
+alex@alex:~/Desktop$ ls
+github_test
+
+* `/nano HelloWorld.txt` Will allow you to create a file and edit it right off the bat
+alex@alex:~/Desktop/github_test$ nano HelloWorld.txt
+
+For example you can run that command then type in "Hello World" then Ctrl+X to exit, then "Y" to save, Lastly make sure the file name is what you want it to be then hit "Enter"
+
+Other ways to make file are things such as:
+Vi
+Vim
+Touch
+Emacs
+
+* `/cat` Concatenate files and print on the standard output (AKA read a file without having to open it)
+
+To read the file that was created in the previous command you can use cat as followed:
+
+alex@alex:~/Desktop/github_test$ cat HellowWorld.txt
+Hello World 
+
+* `/mv` Move (rename) files
+* `/cp` Copy files and directories
+
+* `/ps` Report a snapshot of the current processes
+* `/ps aux` This does the same as "ps" however it is much mmore in dept
+
+Another way on showing different processes are:
+
+* `/top` Display linux processes
+* `/htop` A more detailed version of 'top'
+
+* `/w` Show who is logged on and what they are doing
+* `/who` Show who is logged on
+
+* `/netstat` 
+
+BONUS COMMAND!
+
+* `/whatis` Display one-lined manual page descriptions
+Sometimes you don't also remember what a command does so you can use that command to find out what it does.
