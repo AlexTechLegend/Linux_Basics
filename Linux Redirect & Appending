@@ -1,0 +1,48 @@
+# Linux Redirect & Appending
+
+``` console
+This page will be covering the following:
+* Redirecting an echo text into a file
+* Appending more echo text to the previous existing file
+* Redirecting error messages
+```
+
+# Redirection
+
+* `>` In order to redirect anything to a specific file you can use this command.
+
+Example: 
+
+# echo "hello" > hello.txt
+Please notw that if you do this over a file that is already created, It will over write the file.
+
+# Appending
+
+* `>>` In order to append something to an already existing file use this command.
+
+Example:
+
+# echo "I am adding new text" >> hello.txt
+You can also use this to create a new file.
+
+# echo "I am creating a file using the appending commands" >> Append_test.txt
+This will create a new file with the quoted text. You can later add more text to this.
+
+Now if you are wanting to get a bit more advanced you can run a command like netstat and append it to a file.
+
+Example:
+
+# netstat >> Netstat_Append.txt
+You can do this will many different things which will allow you to log and track at the same time. This can later be used to automate different tasks.
+
+# Redirecting Error Messages
+
+* `2>` In order to redirect an error that you are coming across you can use this command.
+
+Something that you can also do with the Redirection is you can capture different errors that you or your system are coming across.
+
+Example:
+
+# ipconfig /allh 2> ikpconfig_test.txt
+Of course that is not the correct way to use that command however this will allow you to take the error that you are getting and putting it into a file. This could also be something that could be used on the automated side by logging errors.
+
