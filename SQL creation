@@ -1,0 +1,10 @@
+##!/bin/bash                                                                     
+
+# Quick update                                                                  
+sudo apt update
+
+# Install mysql server                                                          
+sudo apt install mysql-server -y
+
+# Check mysql status                                                            
+sudo systemctl status mysql
