@@ -1,0 +1,206 @@
+# First go to my Bash_Scripts tab and install SQL 
+
+# Then once that is created you will need to do the following
+sudo mysql
+
+# Or if you want to define a username and password entire you can do this
+sudo mysql -u username -p 
+
+# Once in you will be at sometihng that looks like this
+ mysql>
+ 
+ # To show what you currently have for databases you must use: always end with ";" to show you are doing writing in sql
+ mysql> show databases;
+ 
+ +--------------------+
+| Database           |
++--------------------+
+| information_schema |
+| mysql              |
+| performance_schema |
+| sys                |
++--------------------+
+
+# In order to create a datadase do the following:
+mysql> create database coffee_table;
+
+# Again we will run the show command
+
+mysql> show databases;
++--------------------+
+| Database           |
++--------------------+
+| coffee_table       |
+| information_schema |
+| mysql              |
+| performance_schema |
+| sys                |
++--------------------+
+
+# To edit the database you must do the following:
+mysql> use coffee_table;
+
+# Once inside can check for tables (note it will show as empty)
+mysql> show tables;
+
+# In order to create a new table we will do something like this:
+mysql> create table coffee (
+    -> id int,
+    -> name varchar(255),
+    -> region varchar(255),
+    -> roast varchar(255)
+    -> );
+
+mysql> show tables;
++------------------------+
+| Tables_in_coffee_table |
++------------------------+
+| coffee                 |
++------------------------+
+
+# What we ended up doing was created a table then each line was its own column
+# (id int) stating "id" is the name of the column
+# (name varchar) is stating that name is the column label and it can be up to 255 characters and can be whatever you like (same goes for the others)
+
+# To view this you must type
+mysql> describe coffee;
++--------+--------------+------+-----+---------+-------+
+| Field  | Type         | Null | Key | Default | Extra |
++--------+--------------+------+-----+---------+-------+
+| id     | int          | YES  |     | NULL    |       |
+| name   | varchar(255) | YES  |     | NULL    |       |
+| region | varchar(255) | YES  |     | NULL    |       |
+| roast  | varchar(255) | YES  |     | NULL    |       |
++--------+--------------+------+-----+---------+-------+
+
+# Now in order to enter values into those different spots we will do the following
+
+mysql> insert into coffee values (1, "Bland", "USA", "Light");
+Query OK, 1 row affected (0.00 sec)
+
+# To view what you just created type the following:
+
+mysql> select * from coffee;
++------+-------+--------+-------+
+| id   | name  | region | roast |
++------+-------+--------+-------+
+|    1 | Bland | USA    | Light |
++------+-------+--------+-------+
+
+# First, you will be "select" ing the info yo want.
+# Then, we are using "*" to show we want to see everything.
+# Lastly, we will typed "from coffee" telling mysql that we are wanting to see info fromt than table.
+
+# Now we will add more into this table
+
+mysql> insert into coffee values (2, "Spicy", "USA", "Light");
+Query OK, 1 row affected (0.00 sec)
+
+mysql> insert into coffee values (3, "Loud", "USA", "Dark");
+Query OK, 1 row affected (0.00 sec)
+
+mysql> insert into coffee values (3, "Error", "Costa Rica", "Blonde");
+Query OK, 1 row affected (0.00 sec)
+
+mysql> select * from coffee;
++------+-------+------------+--------+
+| id   | name  | region     | roast  |
++------+-------+------------+--------+
+|    1 | Bland | USA        | Light  |
+|    2 | Spicy | USA        | Light  |
+|    3 | Loud  | USA        | Dark   |
+|    3 | Error | Costa Rica | Blonde |
++------+-------+------------+--------+
+
+# Like most you will of course make some error's so we will fix that
+
+mysql> delete from coffee where name = "Error";
+Query OK, 1 row affected (0.01 sec)
+
+mysql> select * from coffee;
++------+-------+--------+-------+
+| id   | name  | region | roast |
++------+-------+--------+-------+
+|    1 | Bland | USA    | Light |
+|    2 | Spicy | USA    | Light |
+|    3 | Loud  | USA    | Dark  |
++------+-------+--------+-------+
+
+# Now if you are wanting to refine your search you can use
+
+mysql> select * from coffee where roast = "Light";
++------+-------+--------+-------+
+| id   | name  | region | roast |
++------+-------+--------+-------+
+|    1 | Bland | USA    | Light |
+|    2 | Spicy | USA    | Light |
++------+-------+--------+-------+
+
+# You can also refine it further using 
+
+mysql> select * from coffee where roast = "Light" or region = "Costa Rica";
++------+-------+------------+--------+
+| id   | name  | region     | roast  |
++------+-------+------------+--------+
+|    1 | Bland | USA        | Light  |
+|    2 | Spicy | USA        | Light  |
+|    4 | Fixed | Costa Rica | Blonde |
++------+-------+------------+--------+
+
+# You can also do stuff like greater than or less than or even everything but something like so:
+
+mysql> select * from coffee where not roast = "Light";
++------+-------+------------+--------+
+| id   | name  | region     | roast  |
++------+-------+------------+--------+
+|    3 | Loud  | USA        | Dark   |
+|    4 | Fixed | Costa Rica | Blonde |
++------+-------+------------+--------+
+
+# In order to edit different pieces of info you can do something such as:
+
+mysql> update coffee set region = "Mexico" where name = "Spicy";
+Query OK, 1 row affected (0.00 sec)
+Rows matched: 1  Changed: 1  Warnings: 0
+
+mysql> select * from coffee;
++------+-------+------------+--------+
+| id   | name  | region     | roast  |
++------+-------+------------+--------+
+|    1 | Bland | USA        | Light  |
+|    2 | Spicy | Mexico     | Light  |
+|    3 | Loud  | USA        | Dark   |
+|    4 | Fixed | Costa Rica | Blonde |
++------+-------+------------+--------+
+
+# If you are wanting to add a new column you can do the following: (Boolean - meaning true of false)
+
+mysql> alter table coffee add Has_Caffeine boolean;
+Query OK, 0 rows affected (0.01 sec)
+Records: 0  Duplicates: 0  Warnings: 0
+
+mysql> select * from coffee;
++------+-------+------------+--------+--------------+
+| id   | name  | region     | roast  | Has_Caffeine |
++------+-------+------------+--------+--------------+
+|    1 | Bland | USA        | Light  |         NULL |
+|    2 | Spicy | Mexico     | Light  |         NULL |
+|    3 | Loud  | USA        | Dark   |         NULL |
+|    4 | Fixed | Costa Rica | Blonde |         NULL |
++------+-------+------------+--------+--------------+
+
+# Now to edit the boolean option you must do ( 1 = True | 0 = False)
+
+mysql> update coffee set Has_Caffeine = True where name = "Loud";
+Query OK, 1 row affected (0.01 sec)
+Rows matched: 1  Changed: 1  Warnings: 0
+
+mysql> select * from coffee;
++------+-------+------------+--------+--------------+
+| id   | name  | region     | roast  | Has_Caffeine |
++------+-------+------------+--------+--------------+
+|    1 | Bland | USA        | Light  |            0 |
+|    2 | Spicy | Mexico     | Light  |            1 |
+|    3 | Loud  | USA        | Dark   |            1 |
+|    4 | Fixed | Costa Rica | Blonde |            0 |
++------+-------+------------+--------+--------------+
