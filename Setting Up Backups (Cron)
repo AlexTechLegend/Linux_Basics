@@ -5,7 +5,9 @@ This will be a quick walk through of how to set up backup for your linux machine
 Commands in this:
 sudo apt update
 sudo apt install rysnc
-rsync -av /path/to/source/dir /path/to/dest/dir 
+sudo apt install tar
+0 0 * * * rsync -avz /path/to/source/dir /path/to/dest/dir
+0 0 * * * tar -czvf /path/to/source/dir /path/to/dest/dir
 crontab -e
 crontab -l
 ```
