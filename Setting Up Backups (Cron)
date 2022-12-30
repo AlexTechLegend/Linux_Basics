@@ -1,1 +1,13 @@
+# Setting Up Backups (Cron)
+
+``` console
+This will be a quick walk through of how to set up backup for your linux machine.
+Commands in this:
+sudo apt update
+sudo apt install rysnc
+rsync -av /path/to/source/dir /path/to/dest/dir 
+crontab -e
+crontab -l
+```
+
 
