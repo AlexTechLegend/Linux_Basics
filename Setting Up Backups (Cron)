@@ -9,5 +9,68 @@ rsync -av /path/to/source/dir /path/to/dest/dir
 crontab -e
 crontab -l
 ```
+# First you should also do a quick update
+sudo apt update
 
+# Then you will need to install this service
+sudo apt install rsync 
+and or
+sudo apt install tar
 
+# In order to get this started you will first need to define a source dir and then a dest. dir
+
+# I made mind as follows:
+/home/linux/stufftobackup
+
+# Then my dest path
+/home/linux/Cron_Backups/Logs
+
+# Now you can give it an initial test and or log to start with.
+
+# The initial layout will be labelled as (Minute|Hour|Day of month|Month of year|day of week)
+0 0 * * * tar -czvf /home/linux/stufftobackup /home/linux/Cron_Backups/Logs
+or
+0 0 * * * rysnc -avz /home/linux/stufftobackup /home/linux/Cron_Backups/Logs
+
+# Now you will need to set up the crontab (
+crontab -e
+
+# Edit this file to introduce tasks to be run by cron.
+# 
+# Each task to run has to be defined through a single line
+# indicating with different fields when the task will be run
+# and what command to run for the task
+# 
+# To define the time you can provide concrete values for
+# minute (m), hour (h), day of month (dom), month (mon),
+# and day of week (dow) or use '*' in these fields (for 'any').
+# 
+# Notice that tasks will be started based on the cron's system
+# daemon's notion of time and timezones.
+# 
+# Output of the crontab jobs (including errors) is sent through
+# email to the user the crontab file belongs to (unless redirected).
+# 
+# For example, you can run a backup of all your user accounts
+# at 5 a.m every week with:
+# 0 17 * * * rsync -avz /home/alex/logtobackup /home/alex/Cron_Backups/Logs
+# 
+# For more information see the manual pages of crontab(5) and cron(8)
+# 
+# m h  dom mon dow   command
+-------------------------------------------------------------------------------------------
+
+# Now under the last part you can add the following:
+0 0 * * * tar -czvf /home/linux/stufftobackup /home/linux/Cron_Backups/Logs
+or
+0 0 * * * rysnc -avz /home/linux/stufftobackup /home/linux/Cron_Backups/Logs
+
+# After you can type the following to verify that everything has been set
+crontab -l
+
+# Overall this will backup the stufftobackup directory and add it to the Logs such as:
+/home/linux/Cron_Backups/Logs/stufftobackup
+
+# Also that command will backup that directory everyday at midnight to the dest Logs directory
+
+# Of course you can dive deeper but for starters, that is the basics to cron
