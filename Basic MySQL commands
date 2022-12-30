@@ -1,3 +1,15 @@
+# SQL Commands
+
+``` console
+This will walk you through mysql using things such as:
+show
+create
+describe
+select
+drop
+insert
+```
+
 # First go to my Bash_Scripts tab and install SQL 
 
 # Then once that is created you will need to do the following
